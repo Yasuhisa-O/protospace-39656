@@ -11,7 +11,7 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
@@ -19,6 +19,10 @@ default: &default
 
 development:
   <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
   database: protospace_39656_development
 
 # Warning: The database defined as "test" will be erased and
@@ -26,6 +30,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
   database: protospace_39656_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -50,6 +58,8 @@ test:
 #
 production:
   <<: *default
-  database: protospace_39656_production
-  username: protospace_39656
-  password: <%= ENV["PROTOSPACE_39656_DATABASE_PASSWORD"] %>
+  # database: protospace_39656_production
+  # username: protospace_39656
+  # password: <%= ENV["PROTOSPACE_39656_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
